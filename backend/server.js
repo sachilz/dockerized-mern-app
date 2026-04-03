@@ -3,12 +3,14 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const User = require("./models/user");
 
+require("dotenv").config();
+
 const app = express();
 app.use(express.json());
 app.use(cors());
 
 // 🔗 MongoDB connection (IMPORTANT: use service name "mongo")
-mongoose.connect("mongodb+srv://sachintha:Sachin%401234@cluster0.n9fgbpl.mongodb.net/?appName=Cluster0", {
+mongoose.connect(process.env.MONGODB_URL, {
 })
 .then(() => console.log("MongoDB connected"))
 .catch(err => console.log(err));
@@ -39,16 +41,6 @@ app.put("/user/:id", async (req, res) => {
   }
 });
 
-// UPDATE
-app.put("/user/:id", async (req, res) => {
-  const updatedUser = await User.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true }
-  );
-  res.send(updatedUser);
-});
-
 // DELETE
 app.delete("/user/:id", async (req, res) => {
   await User.findByIdAndDelete(req.params.id);
@@ -74,6 +66,8 @@ app.get("/items", async (req, res) => {
 });
 
 // 🚀 Server
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

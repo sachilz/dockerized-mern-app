@@ -6,7 +6,7 @@ function App() {
   const [age, setAge] = useState("");
   const [editId, setEditId] = useState(null);
 
-  const BASE_URL = "/api";
+  const BASE_URL = process.env.REACT_APP_BACKEND_URL || "/api";
 
   // 📥 GET users
   const fetchUsers = async () => {

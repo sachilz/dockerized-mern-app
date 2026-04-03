@@ -1,13 +1,13 @@
 services:
   frontend:
     build: ./frontend
-    ports:
-      - "3000:3000"
+    environment:
+      - REACT_APP_BACKEND_URL=/api
 
   backend:
     build: ./backend
-    expose:
-      - "5000"
+    env_file:
+      - ./backend/.env
 
   nginx:
     image: nginx:latest
