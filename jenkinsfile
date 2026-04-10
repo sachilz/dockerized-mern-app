@@ -4,25 +4,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/sachilz/dockerized-mern-app'
+                git branch: 'main',
+                    url: 'https://github.com/sachilz/mern-todo-docker-nginx-deployment.git'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('List Files') {
             steps {
-                sh 'npm install'
-            }
-        }
-
-        stage('SonarQube Scan') {
-            steps {
-                sh 'sonar-scanner'
-            }
-        }
-
-        stage('Docker Build') {
-            steps {
-                sh 'docker build -t todo-app .'
+                sh 'ls -la'
             }
         }
     }
