@@ -17,7 +17,7 @@ pipeline {
 
          stage('Gitleaks Secret Scan') {
             steps {
-                bat 'gitleaks detect --source . --verbose'
+                bat '"C:\\tools\\gitleaks\\gitleaks.exe" detect --source . --verbose'
             }
         }
     }
