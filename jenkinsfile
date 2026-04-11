@@ -34,7 +34,7 @@ pipeline {
         stage('SonarQube Scan') {
             steps {
                 withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
-                {
+                    {
                     bat """
                     \"${SONAR_SCANNER}\" ^
                     -Dsonar.projectKey=dockerized-mern-app ^
@@ -42,10 +42,10 @@ pipeline {
                     -Dsonar.host.url=http://localhost:9000 ^
                     -Dsonar.token=%SONAR_TOKEN%
                     """
+                    }
                 }
             }
-        }
-    }
+        }   
         // DEPENDENCY CHECK + BUILD VALIDATION
         stage('Build Validation') {
             steps {
