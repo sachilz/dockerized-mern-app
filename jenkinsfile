@@ -9,6 +9,7 @@ pipeline {
 
     stages {
 
+        // 1. SOURCE CODE
         stage('Checkout') {
             steps {
                 git branch: 'main',
@@ -22,29 +23,14 @@ pipeline {
             }
         }
 
-        //SECRET SCAN (EARLY SECURITY)
+        // 2. SECRET SCAN (EARLY - SHIFT LEFT SECURITY)
         stage('Gitleaks Secret Scan') {
             steps {
                 bat "\"${GITLEAKS_PATH}\" detect --source . --verbose"
             }
         }
 
-        //CODE ANALYSIS
-        stage('SonarQube Scan') {
-            steps {
-                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')])
-                {
-                    bat """
-                    \"${SONAR_SCANNER}\" ^
-                    -Dsonar.projectKey=dockerized-mern-app ^
-                    -Dsonar.sources=. ^
-                    -Dsonar.host.url=http://localhost:9000 ^
-                    -Dsonar.token=%SONAR_TOKEN%
-                    """
-                }
-            }
-        }   
-        // DEPENDENCY CHECK + BUILD VALIDATION
+        // 3. INSTALL + BUILD VALIDATION
         stage('Build Validation') {
             steps {
                 dir('backend') {
@@ -58,12 +44,38 @@ pipeline {
             }
         }
 
-        // DOCKERFILE SECURITY (HADOLINT)
+        // 4. SAST SCAN (SONARQUBE)
+        stage('SonarQube Scan') {
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                        bat """
+                        \"${SONAR_SCANNER}\" ^
+                        -Dsonar.projectKey=dockerized-mern-app ^
+                        -Dsonar.sources=. ^
+                        -Dsonar.host.url=http://localhost:9000 ^
+                        -Dsonar.login=%SONAR_TOKEN%
+                        """
+                    }
+                }
+            }
+        }
+
+        // 5. QUALITY GATE (IMPORTANT BLOCKER)
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 20, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
+        // 6. DOCKERFILE SECURITY SCAN (HADOLINT)
         stage('Hadolint - Backend Dockerfile') {
             steps {
                 dir('backend') {
                     bat "docker run --rm -i hadolint/hadolint < Dockerfile"
-                }   
+                }
             }
         }
 
@@ -74,15 +86,15 @@ pipeline {
                 }
             }
         }
-        
-        // DOCKER BUILD (CREATE IMAGES)
+
+        // 7. DOCKER IMAGE BUILD
         stage('Docker Compose Build') {
             steps {
                 bat 'docker compose build'
             }
         }
 
-        // IMAGE SECURITY SCAN (TRIVY AFTER BUILD)
+        // 8. IMAGE SECURITY SCAN (AFTER BUILD)
         stage('Trivy Container Scan') {
             steps {
                 bat "\"${TRIVY_PATH}\" image --severity HIGH,CRITICAL dockerized-mern-app-backend"
@@ -90,7 +102,7 @@ pipeline {
             }
         }
 
-        // INJECT SECRETS (ENV FILE)
+        // 9. DEPLOYMENT CONFIG (BEFORE RUN)
         stage('Inject Env File') {
             steps {
                 withCredentials([file(credentialsId: 'env-file', variable: 'ENV_FILE')]) {
@@ -99,7 +111,7 @@ pipeline {
             }
         }
 
-        // DEPLOY (RUN CONTAINERS)
+        // 10. RUN APPLICATION
         stage('Run Containers') {
             steps {
                 bat 'docker compose up -d'
