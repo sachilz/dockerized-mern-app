@@ -33,7 +33,8 @@ pipeline {
         //CODE ANALYSIS
         stage('SonarQube Scan') {
             steps {
-                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')])
+                withSonarQubeEnv('sonarqube') {
                     bat """
                     \"${SONAR_SCANNER}\" ^
                     -Dsonar.projectKey=dockerized-mern-app ^
