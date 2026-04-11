@@ -1,87 +1,127 @@
-# 🚀 Containerized MERN Stack with Nginx Reverse Proxy
+<h1 align="center">🚀 Secure Containerized MERN Stack with Nginx Reverse Proxy + Jenkins DevSecOps Pipeline</h1>
 
-A professional-grade full-stack application demonstrating **Microservices Architecture**, **Containerization**, and **Advanced Networking** using Docker and Nginx.
+<p align="center">
+A professional-grade full-stack application demonstrating <b>Microservices Architecture</b>, <b>Containerization</b>, <b>CI Pipeline Automation</b>, and <b>DevSecOps Security Scanning</b> using Docker, Nginx, Jenkins, SonarQube, Gitleaks, and Trivy.
+</p>
 
----
+<hr>
 
-## 🏗️ Project Architecture
+<h2>🏗️ Project Architecture</h2>
+<p>
+This project is not just about CRUD functionality — it focuses on how modern applications are <b>built, secured, containerized, scanned, and deployed</b>.
+</p>
 
-This project isn't just about code; it's about how the system communicates. The architecture follows a "Flow-Wise" deployment strategy:
+<h3>🔹 Core Architecture</h3>
+<ul>
+  <li><b>Frontend:</b> React.js (SPA)</li>
+  <li><b>Backend:</b> Node.js &amp; Express.js API</li>
+  <li><b>Database:</b> MongoDB Atlas (Cloud)</li>
+  <li><b>Reverse Proxy:</b> Nginx</li>
+  <li><b>Orchestration:</b> Docker Compose</li>
+  <li><b>CI/CD:</b> Jenkins Pipeline</li>
+  <li><b>Security:</b> Gitleaks, SonarQube, Trivy</li>
+</ul>
 
-- **Frontend:** React.js (SPA)
-- **Backend:** Node.js & Express.js API
-- **Database:** MongoDB Atlas (Cloud)
-- **Reverse Proxy:** Nginx
-- **Orchestration:** Docker Compose
+<hr>
 
----
+<h2>🛠️ Key Technical Features</h2>
 
-## 🛠️ Key Technical Features
+<h3>1) 🐳 Dockerization &amp; Orchestration</h3>
+<p>The entire stack is containerized using optimized Dockerfiles.</p>
+<pre><code>docker compose up --build</code></pre>
+<p>This ensures a <b>consistent deployment environment across all systems</b>.</p>
 
-### 1. Dockerization & Orchestration
-The entire stack is containerized using optimized Dockerfiles. Using **Docker Compose**, the environment is spun up with a single command, ensuring "it works on my machine" works everywhere.
+<h3>2) 🌐 Nginx Reverse Proxy</h3>
+<ul>
+  <li>Serves static React frontend files</li>
+  <li>Routes <code>/api</code> requests to backend container</li>
+  <li>Eliminates CORS issues in production-style deployments</li>
+  <li>Simulates real-world reverse proxy architecture</li>
+</ul>
 
-### 2. Nginx Reverse Proxy
-Nginx acts as the gatekeeper (Entry Point). It:
-- Serves static React frontend files.
-- Routes `/api` requests dynamically to the Node.js backend container.
-- Handles request headers and prevents CORS issues in a production-like setup.
+<h3>3) 🔗 Service Discovery &amp; Networking</h3>
+<ul>
+  <li>Frontend → <code>http://backend:5000</code></li>
+  <li>Nginx routes traffic between frontend and backend</li>
+  <li>Uses Docker bridge networking instead of localhost</li>
+</ul>
 
-### 3. Service Discovery & Networking
-Instead of using `localhost`, the services communicate via a custom **Docker Bridge Network**. 
-- The Frontend talks to `http://backend:5000` (using the container name).
-- This mimics real-world production environments where IP addresses are dynamic.
+<h3>4) 🧪 API Testing</h3>
+<p>All REST endpoints were tested using <b>Postman</b>.</p>
+<ul>
+  <li>200 OK</li>
+  <li>201 Created</li>
+  <li>Request validation</li>
+  <li>Response schema</li>
+  <li>Error handling</li>
+</ul>
 
-### 4. API Testing
-All RESTful endpoints were rigorously tested using **Postman** to ensure schema validation and correct HTTP status codes (200 OK, 201 Created) before being integrated with the UI.
+<h3>5) ⚙️ Jenkins DevSecOps Pipeline</h3>
+<p>Implemented an automated Jenkins CI pipeline with the following secure stages:</p>
+<ol>
+  <li>Checkout</li>
+  <li>Gitleaks Secret Scan</li>
+  <li>Build / Validation</li>
+  <li>SonarQube Static Code Analysis</li>
+  <li>Docker Build</li>
+  <li>Trivy Vulnerability Scan</li>
+  <li>Container Deployment</li>
+</ol>
 
----
+<h3>6) 🔐 Security Scanning</h3>
+<ul>
+  <li><b>Gitleaks</b> → Detects hardcoded secrets and tokens</li>
+  <li><b>SonarQube</b> → SAST, bugs, code smells, quality gates</li>
+  <li><b>Trivy</b> → HIGH / CRITICAL container vulnerability scanning</li>
+</ul>
 
-## 📁 Project Structure
+<hr>
 
-Below is the organized structure of the project, separating the concerns of the frontend, backend, and infrastructure configuration:
-
-```text
+<h2>📁 Project Structure</h2>
+<pre>
 MERN STACK
 ├── 📂 backend
 │   ├── 📂 models
-│   ├── 📂 node_modules
-│   ├── .gitignore
 │   ├── Dockerfile
-│   ├── package-lock.json
 │   ├── package.json
 │   └── server.js
 ├── 📂 frontend
-│   ├── 📂 node_modules
 │   ├── 📂 public
-│   ├── 📂 src (App.js, index.js, etc.)
-│   ├── .gitignore
+│   ├── 📂 src
 │   ├── Dockerfile
-│   ├── package-lock.json
-│   ├── package.json
-│   └── README.md
+│   └── package.json
 ├── 🐳 docker-compose.yml
-└── ⚙️ nginx.conf
-```
-## 🚀 Getting Started
-### Prerequisites
-- Docker & Docker Compose installed
-- MongoDB Atlas Connection String
+├── ⚙️ nginx.conf
+└── ⚙️ Jenkinsfile
+</pre>
 
-## Installation & Deployment
-### Clone the repository:
-```
-git clone https://github.com/sachilz/dockerized-mern-app
-cd your-repo-name
-```
+<hr>
 
-### Run with Docker Compose:
-```
-docker compose up --build
-```
+<h2>🚀 Getting Started</h2>
+<h3>Prerequisites</h3>
+<ul>
+  <li>Docker &amp; Docker Compose</li>
+  <li>MongoDB Atlas Connection String</li>
+  <li>Jenkins</li>
+  <li>SonarQube</li>
+  <li>Trivy</li>
+</ul>
 
-### Access the App:
-- Frontend/App: http://localhost:80
-- Backend API: http://localhost/api
+<h3>Clone the Repository</h3>
+<pre><code>git clone https://github.com/sachilz/dockerized-mern-app
+cd dockerized-mern-app</code></pre>
 
-#### 👨‍💻 Developed by Sachintha Dilshan - DevOps Enthusiast
+<h3>Run with Docker Compose</h3>
+<pre><code>docker compose up --build</code></pre>
+
+<h3>Access the Application</h3>
+<ul>
+  <li>Frontend/App → <code>http://localhost:80</code></li>
+  <li>Backend API → <code>http://localhost/api</code></li>
+</ul>
+
+<hr>
+
+<h2>👨‍💻 Developed By</h2>
+<p><b>Sachintha Dilshan</b><br>
+DevOps | Cloud | DevSecOps Enthusiast</p>
