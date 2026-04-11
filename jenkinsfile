@@ -68,6 +68,14 @@ pipeline {
             }
         }
 
+        stage('Inject Env File') {
+            steps {
+                withCredentials([file(credentialsId: 'env-file', variable: 'ENV_FILE')]) {
+                bat "copy \"%ENV_FILE%\" .env"
+                }
+            }
+        }
+        
         stage('Run Containers') {
             steps {
                 bat 'docker compose up -d'
