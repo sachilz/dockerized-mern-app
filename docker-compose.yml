@@ -1,8 +1,8 @@
 services:
   frontend:
     build: ./frontend
-    environment:
-      - REACT_APP_BACKEND_URL=/api
+    env_file:
+      - ./frontend/src/.env
 
   backend:
     build: ./backend
