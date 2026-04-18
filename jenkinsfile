@@ -82,6 +82,10 @@ pipeline {
                 withCredentials([file(credentialsId: 'backend-env', variable: 'token')]){
                     bat "copy \"%token%\" backend\\.env"
                 }
+
+                withCredentials([file(credentialsId: 'Frontend-env', variable: 'FE-Token')]){
+                    bat "copy \"%FE-Token%\" frontend\\src\\.env"
+                }
             }
         }
 
