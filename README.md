@@ -12,3 +12,14 @@ This project demonstrates a production-ready DevSecOps pipeline for a MERN stack
 - Orchestration: Docker Compose
 - CI/CD: Jenkins
 - Cloud: AWS EC2
+
+## 🔧 Tech Stack
+- Frontend: React
+- Backend: Node.js, Express
+- Database: MongoDB Atlas
+- CI/CD: Jenkins
+- Containers: Docker, Docker Compose
+- Security Tools: Gitleaks, SonarQube, Trivy
+- Cloud Platform: AWS (EC2)
+- Web Server: Nginx
+- Version Control: Git, GitHub
