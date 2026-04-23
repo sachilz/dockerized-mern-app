@@ -77,3 +77,25 @@ http://localhost
 ```
 
 ## Deployment Workflow ☁️
+![flow](./asset/flow.gif)
+
+## Key Features 🔥
+- Fully automated CI/CD pipeline
+- Shift-left security integration
+- Containerized microservices architecture
+- Secure reverse proxy with Nginx
+- Cloud deployment on AWS
+- Vulnerability-aware deployments
+
+## 📸 Application UI
+![ui](./asset/ui.jpg)
+
+## What I Learned 🧠
+- Implementing DevSecOps in real-world projects
+- Automating security checks in CI/CD
+- Container orchestration using Docker Compose
+- Secure deployment practices on AWS
+
+## Author 👤
+Sachintha Dilshan <br>
+LinkedIn: https://www.linkedin.com/in/sachilz/
