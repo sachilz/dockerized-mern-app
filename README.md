@@ -1,25 +1,28 @@
-<h1 align="center">🚀 Automated DevSecOps Pipeline for MERN Stack Application</h1>
+## Automated DevSecOps Pipeline for MERN Stack App on AWS 🚀
+A production-ready Student Management Application built using the MERN stack and deployed through a fully automated DevSecOps CI/CD pipeline on AWS. This project demonstrates secure software delivery by integrating security at every stage (Shift-Left approach)
 
-## 📌Overview
-This project demonstrates a production-ready DevSecOps pipeline for a MERN stack Student Management System. It focuses on building a secure, automated CI/CD workflow that integrates security at every stage (“Shift Left”) and deploys containerized services to AWS.
+## Architecture Overview 🧩
+![Architecture Diagram](./asset/diagrame.gif)
 
-## 🧠 Architecture
-- Frontend: React (served via Nginx)
-- Backend: Node.js + Express
-- Database: MongoDB Atlas
-- Reverse Proxy: Nginx
-- Containerization: Docker
-- Orchestration: Docker Compose
-- CI/CD: Jenkins
-- Cloud: AWS EC2
+## Tech Stack 🛠️
+- Frontend : React.js
+- Backend : Node.js | Express.js
+- Database : MongoDB Atlas
+- Cloud & Infrastructure : AWS EC2
+- Containerization : Docker | Docker Compose
+- DevSecOps Tools : Gitleaks (Secret Scanning) | SonarQube (SAST) | Trivy (Container Security)
 
-## 🔧 Tech Stack
-- Frontend: React
-- Backend: Node.js, Express
-- Database: MongoDB Atlas
-- CI/CD: Jenkins
-- Containers: Docker, Docker Compose
-- Security Tools: Gitleaks, SonarQube, Trivy
-- Cloud Platform: AWS (EC2)
-- Web Server: Nginx
-- Version Control: Git, GitHub
+## Containerization & Orchestration 🐳
+- Docker
+    - Containerized: React FE | Node.js BE | Nginx reverse proxy
+- Docker Compose
+  - Managed multi-container setup
+  - Enabled secure internal networking
+  - Simplified local development & deployment
+
+## CI/CD Pipeline (DevSecOps) 🔐
+### Security First Approach
+- Secret Scanning : Gitleaks scans for exposed credentials before build
+- Static Code Analysis : SonarQube detects Bugs, Code smells, Vulnerabilities
+- Container Security : Trivy scans Docker images and Pipeline fails if high/critical vulnerabilities found
+- Automated Deployment : Only secure images are pushed and Auto-deployed to AWS EC2
