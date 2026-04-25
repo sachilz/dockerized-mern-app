@@ -1,4 +1,10 @@
 ## Automated DevSecOps Pipeline for MERN Stack App on AWS 🚀
+
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+
 A production-ready Student Management Application built using the MERN stack and deployed through a fully automated DevSecOps CI/CD pipeline on AWS. This project demonstrates secure software delivery by integrating security at every stage (Shift-Left approach)
 
 ## Architecture Overview 🧩
